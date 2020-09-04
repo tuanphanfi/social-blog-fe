@@ -5,6 +5,12 @@ import logo from "../../images/logo.svg";
 import { useSelector } from "react-redux";
 import { authActions } from "../../redux/actions";
 import { useDispatch } from "react-redux";
+import { Modal } from "react-bootstrap";
+import FacebookLogin from "react-facebook-login";
+
+const responseFacebook = (response) => {
+  console.log(response);
+};
 
 const PublicNavbar = () => {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -31,6 +37,14 @@ const PublicNavbar = () => {
       <Nav.Link as={Link} to="/login">
         <i className="fas fa-sign-in-alt" /> Login
       </Nav.Link>
+      <Modal.Dialog>
+        <FacebookLogin
+          appId="1278787999136918"
+          autoLoad={false}
+          fields="name,email,picture"
+          callback={responseFacebook}
+        />
+      </Modal.Dialog>
     </Nav>
   );
 
